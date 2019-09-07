@@ -26,7 +26,7 @@ var gameQuestions = [
         answer: ['Metal Blade']
     },
     {
-        question: 'Proto Man was not created before Mega Man.',
+        question: 'Proto Man was actually not created before Mega Man.',
         options: ['true', 'false'],
         answer: ['false']
     },
@@ -46,8 +46,8 @@ var gameQuestions = [
         answer: ['Bubble Lead']
     },
     {
-        question: "Doc Robot utilizes the program data of which robot master",
-        options: ['Bright Man', 'Flash Man', 'Toad Man', 'None of the above'],
+        question: "Doc Robot utilizes the program data of which robot master?",
+        options: ['Flash Man', 'Magnet Man', 'Toad Man', 'None of the above'],
         answer: ['Flash Man']
     },
 ]
@@ -55,12 +55,12 @@ var gameQuestions = [
 var correct = 0;
 var wrong = 0;
 var index = 0;
-var timer = 0;
+var timer = 5;
 var interval;
 
 $('#start').on('click', function () {
     gameStartAudio.play();
-    setTimeout(questionDisplay, 7000);
+    setTimeout(questionDisplay, 5000);
     console.log("hit start", index);
 });
 
@@ -79,11 +79,11 @@ $(document).on("click", "input", function () {
     }
 
     // $('#question-container').hide();
-    setTimeout(questionDisplay, 6000);
+    setTimeout(questionDisplay, 5000);
     index++;
     console.log("index++", index);
     // questionDisplay();
-    $('#question-container').hide(500);
+    // $('#question-container').show(500);
 
 })
 
@@ -91,7 +91,7 @@ function questionDisplay() {
     $('#question-container').empty();
     // $('#question-container').hide(500);
     $('#question-container').show(500);
-    interval = setInterval(time, 1000 * 15)
+    interval = setInterval(time, 1000)
     var questionHeader = $('<h2>');
     questionHeader.text(gameQuestions[index].question);
     $('#question-container').append(questionHeader);
@@ -107,10 +107,9 @@ function questionDisplay() {
 function time(){
     console.log(timer);
     timer--;
-    var timerDiv = $('#showTime');
+    var timerDiv = $('<div id="show-time">');
     timerDiv.text(timer);
-    // document.getElementById('showTime').text
-
+    $('#question-container').prepend(timerDiv);
     if (timer <= 0){
         clearInterval(interval);
     }
