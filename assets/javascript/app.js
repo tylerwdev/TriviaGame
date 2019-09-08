@@ -55,7 +55,7 @@ var gameQuestions = [
 var correct = 0;
 var wrong = 0;
 var index = 0;
-var timer = 10;
+var timer = 30;
 var interval;
 
 $('#start').on('click', function () {
@@ -94,9 +94,9 @@ function questionDisplay() {
 
     interval = setInterval(time, 1000)
 
-    var timerDiv = $('<div id="show-time">');
+    // var timerDiv = $('<div id="show-time">');
     // timerDiv.text(timer);
-    $('#show-time').html('<h3>' + timerDiv + '</h3>');
+    // $('#show-time').html('<h3>' + timerDiv + '</h3>');
 
     var questionHeader = $('<h2>');
     questionHeader.text(gameQuestions[index].question);
@@ -116,7 +116,7 @@ function time(){
     timer--;
     // var timerDiv = $('<div id="show-time">');
     // timerDiv.text(timer);
-    // $('#show-time').text('<h3>' + timerDiv + '</h3>');
+    $('#show-time').html('<h3> Time remaining: ' + timer + '</h3>');
     if (timer <= 0){
         clearInterval(interval);
     }
