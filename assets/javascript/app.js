@@ -55,8 +55,12 @@ var gameQuestions = [
 var correct = 0;
 var wrong = 0;
 var index = 0;
-var timer = 30;
+var timer = 5;
 var interval;
+
+var reset =function(){
+    timer = 5;
+}
 
 $('#start').on('click', function () {
     gameStartAudio.play();
@@ -67,6 +71,8 @@ $('#start').on('click', function () {
 $(document).on("click", "input", function () {
     console.log("correct answer", gameQuestions[index].answer[0]);
     console.log("checked answer", $("input:checked").val());
+
+
     if (gameQuestions[index].answer[0] === $("input:checked").val())  { 
         console.log("correct answer", index);
         correct++;
@@ -77,8 +83,13 @@ $(document).on("click", "input", function () {
         incorrectAnswer.play();
         console.log('wrong answer', index);
     }
+    // if (timer===0) {
+    //     // questionDisplay()
+    //     wrong++;
+    //     incorrectAnswer.play();
+    //     console.log('wrong answer', index);
+    // }
 
-    // $('#question-container').hide();
     setTimeout(questionDisplay, 5000);
     index++;
     console.log("index++", index);
@@ -109,15 +120,18 @@ function questionDisplay() {
         answerHeader.val(element);
         $('#question-container').append(answerHeader, element);
     }
+
+
 };
 
 function time(){
     console.log(timer);
     timer--;
-    // var timerDiv = $('<div id="show-time">');
-    // timerDiv.text(timer);
     $('#show-time').html('<h3> Time remaining: ' + timer + '</h3>');
-    if (timer <= 0){
-        clearInterval(interval);
+    if (timer === 0){
+        stop()
     }
+}
+function stop(){
+    clearInterval(interval);
 }
