@@ -1,0 +1,35 @@
+body {
+    background-image: url(../images/mega-man_bosses-blue2.png);
+    background-size:cover;
+}
+
+#empty-box {
+    /* background-color: #02efee; */
+    width: auto;
+    height: auto;
+    /* border: solid thin #000000; */
+    margin-top: 1%;
+    /* align-self: stretch; */
+    padding: 4%;
+    text-align: center;
+}
+
+#centered-gamescreen {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+}
+
+#game-screen {
+    background-color: #02efee;
+    width: auto;
+    height: auto;
+    border: solid thin #000000;
+    margin-top: 1%;
+    /* align-self: stretch; */
+    padding: 8%;
+    text-align: center;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+}

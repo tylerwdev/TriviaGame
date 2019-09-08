@@ -55,7 +55,7 @@ var gameQuestions = [
 var correct = 0;
 var wrong = 0;
 var index = 0;
-var timer = 5;
+var timer = 10;
 var interval;
 
 $('#start').on('click', function () {
@@ -91,10 +91,17 @@ function questionDisplay() {
     $('#question-container').empty();
     // $('#question-container').hide(500);
     $('#question-container').show(500);
+
     interval = setInterval(time, 1000)
+
+    var timerDiv = $('<div id="show-time">');
+    // timerDiv.text(timer);
+    $('#show-time').html('<h3>' + timerDiv + '</h3>');
+
     var questionHeader = $('<h2>');
     questionHeader.text(gameQuestions[index].question);
     $('#question-container').append(questionHeader);
+
     // console.log(gameQuestions[index].options[0]);
     for (let i = 0; i < gameQuestions[index].options.length; i++) {
         const element = gameQuestions[index].options[i];
@@ -107,9 +114,9 @@ function questionDisplay() {
 function time(){
     console.log(timer);
     timer--;
-    var timerDiv = $('<div id="show-time">');
-    timerDiv.text(timer);
-    $('#question-container').prepend(timerDiv);
+    // var timerDiv = $('<div id="show-time">');
+    // timerDiv.text(timer);
+    // $('#show-time').text('<h3>' + timerDiv + '</h3>');
     if (timer <= 0){
         clearInterval(interval);
     }
