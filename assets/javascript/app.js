@@ -13,6 +13,7 @@
 var gameStartAudio = new Audio('assets/audio/mega-man_stage_select.mp3')
 var correctAnswer = new Audio('assets/audio/mega-man_stage_clear.mp3')
 var incorrectAnswer = new Audio('assets/audio/mega-man_death.mp3')
+var endMusic = new Audio('assets/audio/21-epilogue.mp3')
 
 var gameQuestions = [
     {
@@ -58,9 +59,17 @@ var index = 0;
 var timer = 5;
 var interval;
 
+var playerWins = document.getElementById("playerWins");
+var playerLosses = document.getElementById("playerLosses");
+
+var hasGameEnded = false;
+
 var reset =function(){
     timer = 5;
+    clearInterval(interval);
 }
+
+document.getElementsByClassName('.hide').style.display='none';
 
 $('#start').on('click', function () {
     gameStartAudio.play();
@@ -77,37 +86,55 @@ $(document).on("click", "input", function () {
         console.log("correct answer", index);
         correct++;
         correctAnswer.play();
+        
     }
-    else {
-        wrong++;
-        incorrectAnswer.play();
-        console.log('wrong answer', index);
-    }
-    // if (timer===0) {
-    //     // questionDisplay()
+
+    //  if (timer===0) {
+    //     questionDisplay()
     //     wrong++;
     //     incorrectAnswer.play();
     //     console.log('wrong answer', index);
     // }
 
-    setTimeout(questionDisplay, 5000);
+    else {
+        wrong++;
+        incorrectAnswer.play();
+        console.log('wrong answer', index);
+    }
+
+    playerWins.textContent = " " + correct;
+    playerLosses.textContent = " " + wrong;
+   
+    setTimeout(questionDisplay, 10000);
     index++;
     console.log("index++", index);
-    // questionDisplay();
+
+    questionDisplay();
     // $('#question-container').show(500);
 
+    if (hasGameEnded) {
+        index===7;
+        document.getElementsByClassName('.hide').style.display='block';
+        hasGameEnded = true;
+    }
+
 })
+
+// function endScreen() {
+//     $('#question-container').empty();
+//     $('#question-container').html('<h2>' + correct + wrong + '</h2>');
+//     // $('#show-time').html('<h3> Time remaining: ' + timer + '</h3>');
+
+// }
 
 function questionDisplay() {
     $('#question-container').empty();
     // $('#question-container').hide(500);
     $('#question-container').show(500);
 
-    interval = setInterval(time, 1000)
+    reset();
 
-    // var timerDiv = $('<div id="show-time">');
-    // timerDiv.text(timer);
-    // $('#show-time').html('<h3>' + timerDiv + '</h3>');
+    interval = setInterval(time, 1000)
 
     var questionHeader = $('<h2>');
     questionHeader.text(gameQuestions[index].question);
@@ -120,8 +147,6 @@ function questionDisplay() {
         answerHeader.val(element);
         $('#question-container').append(answerHeader, element);
     }
-
-
 };
 
 function time(){
