@@ -56,20 +56,20 @@ var gameQuestions = [
 var correct = 0;
 var wrong = 0;
 var index = 0;
-var timer = 5;
+var timer = 15;
 var interval;
 
 var playerWins = document.getElementById("playerWins");
 var playerLosses = document.getElementById("playerLosses");
 
-var hasGameEnded = false;
+// var hasGameEnded = false;
 
 var reset =function(){
-    timer = 5;
+    timer = 15;
     clearInterval(interval);
 }
 
-document.getElementsByClassName('.hide').style.display='none';
+// document.getElementsByClassName('.hide').style.display='none';
 
 $('#start').on('click', function () {
     gameStartAudio.play();
@@ -112,11 +112,11 @@ $(document).on("click", "input", function () {
     questionDisplay();
     // $('#question-container').show(500);
 
-    if (hasGameEnded) {
-        index===7;
-        document.getElementsByClassName('.hide').style.display='block';
-        hasGameEnded = true;
-    }
+    // if (hasGameEnded) {
+    //     index===7;
+    //     document.getElementsByClassName('.hide').style.display='block';
+    //     hasGameEnded = true;
+    // }
 
 })
 
